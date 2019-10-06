@@ -1,6 +1,13 @@
 # frozen_string_literal: true
 
 class TextPrep
+  def self.extract_srts
+    Dir.children('data/video').each do |name|
+      srt_path = "data/text/#{File.basename(name, '.*')}.srt"
+      `ffmpeg -i data/video/#{name.shellescape} -y -map 0:s:0 #{srt_path.shellescape}` unless File.exists?(srt_path)
+    end
+  end
+
   def self.create_prealignment_files
     dir = 'data/text/raw'
     file_names = Dir.children(dir)
@@ -40,5 +47,5 @@ class TextPrep
     text.gsub(/\n+\s*/, "\n").strip
   end
 
-  create_prealignment_files
+  # create_prealignment_files
 end
