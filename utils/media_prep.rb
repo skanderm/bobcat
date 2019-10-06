@@ -13,8 +13,5 @@ class MediaPrep
       `ffmpeg -i data/video/#{name.shellescape} -vn -c:a libmp3lame -y #{audio_path}` unless File.exists?(audio_path)
     end
   end
-
-  def align_audio(audio_path, text_path, alignment_path)
-  end
 end
 
