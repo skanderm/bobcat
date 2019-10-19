@@ -57,4 +57,4 @@ def each_slice(size, iterable):
     if current_slice:
         yield current_slice
 
-generate_specs()
+# generate_specs()
