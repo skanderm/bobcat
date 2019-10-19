@@ -9,7 +9,7 @@ defmodule Aligner do
         %{
           root_name: root_name,
           text_path: "data/text/raw/#{text_name}",
-          audio_path: "data/audio/#{root_name}.mp3"
+          audio_path: "data/audio/mp3/#{root_name}.mp3"
         }
       end)
 
@@ -54,4 +54,4 @@ defmodule Aligner do
   end
 end
 
-Aligner.align()
+# Aligner.align()

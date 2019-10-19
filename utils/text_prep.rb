@@ -22,10 +22,10 @@ class TextPrep
     new_path = "data/text/prealigned/#{file_name}"
 
     text
-      .yield_self(&method(:replace_dashes_with_newlines))
-      .yield_self(&method(:remove_speaker_names))
-      .yield_self(&method(:cleanup_newlines))
-      .yield_self { |t| save_text(t, new_path) }
+      .then(&method(:replace_dashes_with_newlines))
+      .then(&method(:remove_speaker_names))
+      .then(&method(:cleanup_newlines))
+      .then { |t| save_text(t, new_path) }
   end
 
   def self.save_text(text, file_path)
