@@ -2,9 +2,9 @@
 
 class TextPrep
   def self.extract_srts
-    Dir.children('data/video').each do |name|
+    Dir.children('data/video/mkv').each do |name|
       srt_path = "data/text/#{File.basename(name, '.*')}.srt"
-      `ffmpeg -i data/video/#{name.shellescape} -y -map 0:s:0 #{srt_path.shellescape}` unless File.exists?(srt_path)
+      `ffmpeg -i data/video/mkv/#{name.shellescape} -y -map 0:s:0 #{srt_path.shellescape}` unless File.exists?(srt_path)
     end
   end
 
