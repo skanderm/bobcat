@@ -13,13 +13,4 @@ The audio labeling UI allows you to view audio/video data using multiple lenses 
 Convert source data to various video, audio, and text formats using `utils/`.
 
 ### UI server
-Run a basic http server to serve `data/` using `http-server`:
-
-`npm install -g http-server`
-
-`http-server data/`
-
-
-Then, run the UI:
-
-`cd ui && npm start`
+To run the internal CDN and web server with just `foreman start` (after `gem install foreman` if the `foreman` gem isn't already installed)
