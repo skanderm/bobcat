@@ -6,7 +6,8 @@
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-scripts": "3.2.0",
-    "video.js": "^7.6.5"
+    "video.js": "^7.6.5",
+    "videojs-hotkeys": "^0.2.25"
   },
   "scripts": {
     "build:style": "tailwind build src/styles/index.css -o src/styles/tailwind.css",

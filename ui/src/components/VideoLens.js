@@ -1,14 +1,15 @@
 import React, { useLayoutEffect, useRef, useState } from "react"
 import videojs from "video.js"
+import "videojs-hotkeys"
 
 import "video.js/dist/video-js.css"
 
-// Specify src, control playback, speed, etc
 function VideoLens({ src, onLoad } = { onLoad: () => {} }) {
   const [key, setKey] = useState(0)
   let videoNode = useRef(null)
+  const playbackRates = [0.5, 1, 1.5, 2, 2.5, 3]
   const options = {
-    playbackRates: [0.5, 1, 1.5, 2, 2.5, 3],
+    playbackRates,
     controls: true,
     sources: [{ src }]
   }
@@ -25,7 +26,33 @@ function VideoLens({ src, onLoad } = { onLoad: () => {} }) {
         forward: forward(this),
         setPlaybackRate: setPlaybackRate(this)
       })
-    }).ready()
+
+      this.hotkeys({
+        volumeStep: 0.1,
+        seekStep: 5,
+        enableJogStyle: true,
+        customKeys: {
+          slowDown: {
+            key: e => e.which === 188,
+            handler: (player, _options, _event) => {
+              const currentRate = getPlaybackRate(player)()
+              const rateIdx = playbackRates.indexOf(currentRate)
+              const newIdx = Math.max(0, rateIdx - 1)
+              setPlaybackRate(player)(playbackRates[newIdx])
+            }
+          },
+          speedUp: {
+            key: e => e.which === 190,
+            handler: (player, _options, _event) => {
+              const currentRate = getPlaybackRate(player)()
+              const rateIdx = playbackRates.indexOf(currentRate)
+              const newIdx = Math.min(playbackRates.length - 1, rateIdx + 1)
+              setPlaybackRate(player)(playbackRates[newIdx])
+            }
+          }
+        }
+      })
+    })
 
     return () => {
       if (player) {
@@ -71,7 +98,11 @@ const forward = player => seconds => {
 }
 
 const setPlaybackRate = player => rate => {
-  if (player) player.setPlaybackRate(rate)
+  if (player) player.playbackRate(rate)
+}
+
+const getPlaybackRate = player => () => {
+  if (player) return player.playbackRate()
 }
 
 export default VideoLens
