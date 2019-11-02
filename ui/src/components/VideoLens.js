@@ -33,7 +33,7 @@ function VideoLens({ src, onLoad } = { onLoad: () => {} }) {
         enableJogStyle: true,
         customKeys: {
           slowDown: {
-            key: e => e.which === 188,
+            key: e => e.shiftKey && e.which === 188, // '<' key
             handler: (player, _options, _event) => {
               const currentRate = getPlaybackRate(player)()
               const rateIdx = playbackRates.indexOf(currentRate)
@@ -42,7 +42,7 @@ function VideoLens({ src, onLoad } = { onLoad: () => {} }) {
             }
           },
           speedUp: {
-            key: e => e.which === 190,
+            key: e => e.shiftKey && e.which === 190, // '>' key
             handler: (player, _options, _event) => {
               const currentRate = getPlaybackRate(player)()
               const rateIdx = playbackRates.indexOf(currentRate)
