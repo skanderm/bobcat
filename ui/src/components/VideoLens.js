@@ -3,43 +3,12 @@ import videojs from "video.js"
 
 import "video.js/dist/video-js.css"
 
-const play = player => () => {
-  if (player) player.play()
-}
-const pause = player => () => {
-  if (player) player.pause()
-}
-
-const playPause = player => () => {
-  if (player) player.paused() ? player.play() : player.pause()
-}
-
-const getPlayerTime = player => () => {
-  if (player) return player.currentTime()
-}
-
-const setPlayerTime = player => time => {
-  if (player) player.currentTime(time)
-}
-
-const rewind = player => seconds => {
-  if (player) setPlayerTime(player)(getPlayerTime(player)() - seconds)
-}
-
-const forward = player => seconds => {
-  if (player) rewind(player)(-seconds)
-}
-
-const setPlaybackRate = player => rate => {
-  if (player) player.setPlaybackRate(rate)
-}
-
 // Specify src, control playback, speed, etc
 function VideoLens({ src, onLoad } = { onLoad: () => {} }) {
   const [key, setKey] = useState(0)
   let videoNode = useRef(null)
   const options = {
-    /* autoplay: true, */
+    playbackRates: [0.5, 1, 1.5, 2, 2.5, 3],
     controls: true,
     sources: [{ src }]
   }
@@ -72,6 +41,37 @@ function VideoLens({ src, onLoad } = { onLoad: () => {} }) {
       <video ref={videoNode} className="video-js vjs-16-9"></video>
     </div>
   )
+}
+
+const play = player => () => {
+  if (player) player.play()
+}
+const pause = player => () => {
+  if (player) player.pause()
+}
+
+const playPause = player => () => {
+  if (player) player.paused() ? player.play() : player.pause()
+}
+
+const getPlayerTime = player => () => {
+  if (player) return player.currentTime()
+}
+
+const setPlayerTime = player => time => {
+  if (player) player.currentTime(time)
+}
+
+const rewind = player => seconds => {
+  if (player) setPlayerTime(player)(getPlayerTime(player)() - seconds)
+}
+
+const forward = player => seconds => {
+  if (player) rewind(player)(-seconds)
+}
+
+const setPlaybackRate = player => rate => {
+  if (player) player.setPlaybackRate(rate)
 }
 
 export default VideoLens
