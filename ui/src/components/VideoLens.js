@@ -4,7 +4,7 @@ import "videojs-hotkeys"
 
 import "video.js/dist/video-js.css"
 
-function VideoLens({ src, onLoad } = { onLoad: () => {} }) {
+function VideoLens({ src, onLoad, ...props } = { onLoad: () => {} }) {
   const [key, setKey] = useState(0)
   let videoNode = useRef(null)
   const playbackRates = [0.5, 1, 1.5, 2, 2.5, 3]
@@ -64,8 +64,8 @@ function VideoLens({ src, onLoad } = { onLoad: () => {} }) {
   }, [options.sources.src])
 
   return (
-    <div data-vjs-player key={`video-${key}`}>
-      <video ref={videoNode} className="video-js vjs-16-9"></video>
+    <div data-vjs-player key={`video-${key}`} className={props.className}>
+      <video ref={videoNode} className="video-js max-h-full" />
     </div>
   )
 }
