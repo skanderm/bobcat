@@ -13,7 +13,17 @@ const alignedTextPath = ep => `${base}/text/aligned/${ep}.json`
 
 // Lenses to show: Video, RawText, AlignedText, Spect
 function Episode({ ep }) {
-  const [controls, setControls] = useState({})
+  const noop = () => {}
+  const [controls, setControls] = useState({
+    play: noop,
+    pause: noop,
+    playPause: noop,
+    getPlayerTime: noop,
+    setPlayerTime: noop,
+    rewind: noop,
+    forward: noop,
+    setPlaybackRate: noop
+  })
   return (
     <div>
       <h1>Episode {ep}</h1>

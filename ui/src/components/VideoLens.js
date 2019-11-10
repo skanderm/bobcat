@@ -64,8 +64,8 @@ function VideoLens({ src, onLoad, ...props } = { onLoad: () => {} }) {
   }, [options.sources.src])
 
   return (
-    <div data-vjs-player key={`video-${key}`} className={props.className}>
-      <video ref={videoNode} className="video-js max-h-full" />
+    <div data-vjs-player key={`video-${key}`} className={`${props.className}`}>
+      <video ref={videoNode} className="video-js max-h-full w-1/2" />
     </div>
   )
 }
